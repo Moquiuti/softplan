@@ -1,78 +1,40 @@
 package br.com.softplan.aplication.entidades;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Moquiuti
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "imagem")
-public class Imagem {
+public class Imagem implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "datacadastro")
     private Date dataCadastro;
 
-    @Column(length = 100)
+    @Column(name = "titulo", length = 100)
     private String titulo;
 
+    @Column(name = "tamanho")
     private String tamanho;
 
+    @Column(name = "base64")
     private String base64;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getDataCadastro() {
-        return dataCadastro;
-    }
-
-    public void setDataCadastro(Date dataCadastro) {
-        this.dataCadastro = dataCadastro;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getTamanho() {
-        return tamanho;
-    }
-
-    public void setTamanho(String tamanho) {
-        this.tamanho = tamanho;
-    }
-
-    public String getBase64() {
-        return base64;
-    }
-
-    public void setBase64(String base64) {
-        this.base64 = base64;
-    }
-
-    public Imagem(Long id, Date dataCadastro, String titulo, String tamanho, String base64) {
-        this.id = id;
-        this.dataCadastro = dataCadastro;
-        this.titulo = titulo;
-        this.tamanho = tamanho;
-        this.base64 = base64;
-    }
-
-    public Imagem() {
-    }
 
 }

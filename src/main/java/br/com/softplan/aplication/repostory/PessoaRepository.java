@@ -15,5 +15,8 @@ import org.springframework.data.repository.query.Param;
  */
 public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
 
-    Pessoa findByCpf(@Param(":p0") String cpf);
+    Pessoa findCpf(@Param("p0") String p0);
+
+    Pessoa findId(@Param("p0") Long p0);
+
 }
