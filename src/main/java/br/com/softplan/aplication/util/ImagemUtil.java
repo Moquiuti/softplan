@@ -90,26 +90,26 @@ public class ImagemUtil {
         return newImage;
     }
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("/home/moquiuti/image"));
-        Throwable var2 = null;
-        try {
-            String currentLine = reader.readLine();
-            System.out.println(redimensionarLarge(currentLine));
-        } catch (Exception var12) {
-            var2 = var12;
-            throw var12;
-        } finally {
-            if (var2 != null) {
-                try {
-                    reader.close();
-                } catch (IOException var11) {
-                    var2.addSuppressed(var11);
-                }
-            } else {
-                reader.close();
-            }
-
-        }
-    }
+//    public static void main(String[] args) throws IOException {
+//        BufferedReader reader = new BufferedReader(new FileReader("/home/moquiuti/image"));
+//        Throwable var2 = null;
+//        try {
+//            String currentLine = reader.readLine();
+//            System.out.println(redimensionarLarge(currentLine));
+//        } catch (Exception var12) {
+//            var2 = var12;
+//            throw var12;
+//        } finally {
+//            if (var2 != null) {
+//                try {
+//                    reader.close();
+//                } catch (IOException var11) {
+//                    var2.addSuppressed(var11);
+//                }
+//            } else {
+//                reader.close();
+//            }
+//
+//        }
+//    }
 }

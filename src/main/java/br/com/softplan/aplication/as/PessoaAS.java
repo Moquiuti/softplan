@@ -11,6 +11,8 @@ import br.com.softplan.aplication.util.ImagemUtil;
 import br.com.softplan.aplication.util.Removedor;
 import br.com.softplan.aplication.util.Validador;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -125,14 +127,26 @@ public class PessoaAS {
         return ResponseEntity.status(HttpStatus.OK).body(repository.findById(id));
     }
 
-    public ResponseEntity<List<Pessoa>> findQuery(String nome, String cpf, Date nascimento, String email, Integer page, Integer perPage) {
+    public ResponseEntity<List<Pessoa>> findQuery(String nome, String cpf, String nascimento, String email, Integer page, Integer perPage) {
         ExampleMatcher matcher = ExampleMatcher
                 .matchingAll()
                 .withMatcher("nome", contains().contains())
                 .withMatcher("cpf", contains().exact())
                 .withMatcher("email", contains().exact())
-                .withMatcher("nascimento", contains().exact());
-        Pessoa pessoa = Pessoa.builder().nome(nome).cpf(cpf).email(email).nascimento(nascimento).build();
+                .withMatcher("nascimento", contains().exact())
+                .withMatcher("ativo", contains().exact());
+        if (cpf != null) {
+            cpf = Removedor.removeCaracteresEspeciais(cpf);
+        }
+
+        Date dataNascimento = null;
+        if (nascimento != null) {
+            ZoneId defaultZoneId = ZoneId.systemDefault();
+            LocalDate localDate = LocalDate.parse(nascimento);
+            dataNascimento = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+        }
+
+        Pessoa pessoa = Pessoa.builder().nome(nome).cpf(cpf).nascimento(dataNascimento).email(email).ativo(Boolean.TRUE).build();
         PageRequest paging = PageRequest.of(page - 1, perPage, Sort.by(Sort.Direction.fromString("asc"), "nome"));
         Page<Pessoa> result = this.repository.findAll(Example.of(pessoa, matcher), paging);
         if (result.hasContent()) {

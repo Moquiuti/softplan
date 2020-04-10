@@ -46,6 +46,7 @@ public class Pessoa implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name = "nascimento")
     private Date nascimento;
+    
     @Column(name = "ativo")
     private Boolean ativo;
 

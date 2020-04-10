@@ -13,6 +13,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author moquiuti
  */
-//@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping({"/"})
 public class PessoaResource {
@@ -38,7 +39,7 @@ public class PessoaResource {
     public ResponseEntity<ResponseEntity<List<Pessoa>>> findQuery(
             @RequestParam(required = false) String nome,
             @RequestParam(required = false) String cpf,
-            @RequestParam(required = false) Date nascimento,
+            @RequestParam(required = false) String nascimento,
             @RequestParam(required = false) String email,
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "10") Integer perPage) {
